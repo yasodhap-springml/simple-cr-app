@@ -1,4 +1,4 @@
-FROM python:3.7-slim
+FROM python:3.9-slim
 
 ENV PYTHONUNBUFFERED True
 
@@ -8,4 +8,8 @@ COPY . ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 800 main:app
+# Open port 8080 for serving the webpage
+EXPOSE 8088
+
+# Run app.py when the container launches
+CMD ["python3", "app.py"]
