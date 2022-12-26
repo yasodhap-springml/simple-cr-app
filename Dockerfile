@@ -8,8 +8,4 @@ COPY . ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Open port 8080 for serving the webpage
-EXPOSE 8088
-
-# Run app.py when the container launches
-CMD ["python3", "app.py"]
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 800 main:app

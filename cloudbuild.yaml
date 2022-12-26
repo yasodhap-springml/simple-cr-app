@@ -24,6 +24,8 @@ steps:
       - "${_CLOUD_RUN_SA}"
       - "--min-instances"
       - "1"
+      - "--port"
+      - "9002"
 images:
   - "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}"
 options:
