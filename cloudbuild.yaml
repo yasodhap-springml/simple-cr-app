@@ -22,7 +22,6 @@ steps:
       - "managed"
       - "--service-account"
       - "${_CLOUD_RUN_SA}"
-      - "PROJECT_ID=${_PROJECT_ID}"
       - "--min-instances"
       - "1"
 images:
