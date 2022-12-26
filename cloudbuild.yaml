@@ -2,7 +2,7 @@ steps:
   #build docker container
   - name: "gcr.io/cloud-builders/docker"
     dir: "."
-    args: ["build", "-t", "gcr.io/${_PROJECT_ID_}/${_IMAGE_NAME}", "."]
+    args: ["build", "-t", "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}", "."]
   #push container to container registry
   - name: "gcr.io/cloud-builders/docker"
     dir: "."
