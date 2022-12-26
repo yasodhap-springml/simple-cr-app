@@ -33,3 +33,4 @@ substitutions:
   _IMAGE_NAME: simple-cr-app
   _CLOUD_RUN_SA: terraform-gke@vishnu-scrum-team-new.iam.gserviceaccount.com
   _PROJECT_ID: vishnu-scrum-team-new
+  
