@@ -1,13 +1,18 @@
-# -*- coding: utf-8 -*-
-import datetime;
+import datetime
 
-def main():
-   
-    print('Hello Application. You are @ ')
-    print(datetime.datetime.now())
-    print("helllodjhfdkjgfkdks jdfyduyeuiriowepwoqudhgwswjdhskldlskd")
+import os
 
+from flask import Flask
+
+app = Flask(__name__)
 
 
-if __name__ == '__main__':
-    main()
+@app.route("/")
+def hello_world():
+    name = os.environ.get("NAME", "World")  + '. This is Backend Service'
+    return "Hello {}!".format(name)
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+# [END run_helloworld_service]
+# [END cloudrun_helloworld_service]

@@ -1,14 +1,37 @@
-# Pub/Sub on Kubernetes Engine
+# Cloud Run Hello World Sample
 
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/kubernetes-engine-samples&cloudshell_tutorial=README.md&cloudshell_workspace=cloud-pubsub/)
+This sample shows how to deploy a Hello World application to Cloud Run.
 
-This repository contains source code, Docker image build file and Kubernetes
-manifests for Pub/Sub on Kubernetes Engine tutorial. Please follow the tutorial
-at https://cloud.google.com/kubernetes-engine/docs/tutorials/authenticating-to-cloud-pubsub.
+## Build
 
-This program reads messages published on a particular topic and prints them on
-standard output.
+```
+docker build --tag helloworld:python .
+```
 
-Docker image for this application is available at
-`us-docker.pkg.dev/google-samples/containers/gke/pubsub-sample:v1`.
-Testing SOnarQube configurtaion
+## Run Locally
+
+```
+docker run --rm -p 9090:8080 -e PORT=8080 helloworld:python
+```
+
+## Test
+
+```
+pytest
+```
+
+_Note: you may need to install `pytest` using `pip install pytest`._
+
+## Deploy
+
+```sh
+# Set an environment variable with your GCP Project ID
+export GOOGLE_CLOUD_PROJECT=<PROJECT_ID>
+
+# Submit a build using Google Cloud Build
+gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/cr-demo-backend
+
+# Deploy to Cloud Run
+gcloud run deploy cr-demo-backend \
+--image gcr.io/${GOOGLE_CLOUD_PROJECT}/cr-demo-backend
+```
