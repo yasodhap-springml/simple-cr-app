@@ -9,7 +9,8 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     name = os.environ.get("NAME", "World")  + '. This is Backend Service'
-    return "Hello {}!".format(name)
+    call_bq()
+    return "Hello {}!".format(name) 
 
 def call_bq():
     client = bigquery.Client()
