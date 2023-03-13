@@ -1,29 +1,53 @@
 import os
 
 from flask import Flask
-from google.cloud import bigquery
+import requests
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def hello_world():
-    name = call_bq()  + '. This is Backend Service'
-    print(name)
-    return "Hello {}!".format(name) 
+def hello_frontend():
+    # open a connection to a URL using urllib2
+   #webUrl = urllib.request.urlopen("https://www.youtube.com/user/guru99com")
+    webUrl = requests.get("https://cr-demo-backend-6mckjolnxq-el.a.run.app")
+  
+#get the result code and print it
+    print ("result code: " + str(webUrl.status_code))
+  
+# read the data from the URL and print it
+    data = webUrl.text
+    print (data)
+    return "This frontend service calling another service with message - {}!".format(data)
 
-def call_bq():
-    client = bigquery.Client()
-    query = """
-    SELECT * FROM `ashwani-21apr-22-scrumteam.cr_demo_dataset.cr_demo_table` LIMIT 1
-        """
-    query_job = client.query(query)  
-    for row in query_job:
-        row_name = row.name
-        #row_list.append(row_name)
-        return row_name
+@app.route("/external")
+def test_external():
+    # open a connection to a URL using urllib2
+   #webUrl = urllib.request.urlopen("https://www.youtube.com/user/guru99com")
+    webUrl = requests.get("https://www.google.com/")
+  
+#get the result code and print it
+    print ("result code: " + str(webUrl.status_code))
+  
+# read the data from the URL and print it
+    data = webUrl.text
+    print (data)
+    return "external call from the frontendservice is - {}!".format(data)
+
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
-# [END run_helloworld_service]
-# [END cloudrun_helloworld_service]
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8088)))
+
+# def main():
+# # open a connection to a URL using urllib2
+#    webUrl = urllib.request.urlopen("https://www.youtube.com/user/guru99com")
+  
+# #get the result code and print it
+#    print ("result code: " + str(webUrl.getcode())) 
+  
+# # read the data from the URL and print it
+#    data = webUrl.read()
+#    print (data)
+ 
+# if __name__ == "__main__":
+#   main()

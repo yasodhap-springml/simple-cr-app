@@ -26,13 +26,13 @@ steps:
       - "--min-instances"
       - "1"
       - "--port"
-      - "9002"
+      - "9004"
 images:
   - "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}"
 options:
   logging: CLOUD_LOGGING_ONLY
 substitutions:
-  _IMAGE_NAME: cr-demo-backend
-  _CLOUD_RUN_SA: cr-demo@ashwani-21apr-22-scrumteam.iam.gserviceaccount.com
+  _IMAGE_NAME: cr-demo-frontend
+  _CLOUD_RUN_SA: cr-demo-frontend@ashwani-21apr-22-scrumteam.iam.gserviceaccount.com
   _PROJECT_ID: ashwani-21apr-22-scrumteam
   
