@@ -8,8 +8,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    name = os.environ.get("NAME", "World")  + '. This is Backend Service'
-    call_bq()
+    name = call_bq()  + '. This is Backend Service'
+    print(name)
     return "Hello {}!".format(name) 
 
 def call_bq():
@@ -21,7 +21,7 @@ def call_bq():
     for row in query_job:
         row_name = row.name
         #row_list.append(row_name)
-        print(row_name)
+        return row_name
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
