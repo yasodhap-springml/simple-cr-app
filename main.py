@@ -2,11 +2,29 @@ import os
 
 from flask import Flask
 from google.cloud import bigquery
+from google.auth.transport import requests
+from google.oauth2 import id_token
+
 
 app = Flask(__name__)
 
+@app.route("/backend")
+def receive_authorized_get_request(request):
+    
+    auth_header = request.headers.get("Authorization")
+    if auth_header:
+        # split the auth type and value from the header.
+        auth_type, creds = auth_header.split(" ", 1)
 
-@app.route("/")
+        if auth_type.lower() == "bearer":
+            claims = id_token.verify_token(creds, requests.Request())
+            return f"Hello, {claims['email']}!\n"
+
+        else:
+            return f"Unhandled header format ({auth_type}).\n"
+    return "Hello, anonymous user.\n"
+
+@app.route("/callbq")
 def hello_world():
     name = call_bq()  + '. This is Backend Service'
     print(name)
