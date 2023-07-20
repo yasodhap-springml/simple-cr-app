@@ -9,6 +9,18 @@ from google.oauth2 import id_token
 app = Flask(__name__)
 
 @app.route("/backend")
+def hello_backend():
+    name = '. This is Backend Service'
+    print(name)
+    return name 
+
+@app.route("/")
+def hello_backend1():
+    name = '. This is Backend Service'
+    print(name)
+    return "Hello {}!".format(name) 
+
+@app.route("/process_authentication")
 def receive_authorized_get_request(request):
     
     auth_header = request.headers.get("Authorization")
