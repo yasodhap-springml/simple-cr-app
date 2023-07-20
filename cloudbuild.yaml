@@ -17,22 +17,22 @@ steps:
       - "--image"
       - "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}"
       - "--region"
-      - "asia-south1"
+      - "us-east4"
       - "--platform"
       - "managed"
-      - "--allow-unauthenticated"
+      - "--no-allow-unauthenticated"
       - "--service-account"
       - "${_CLOUD_RUN_SA}"
       - "--min-instances"
       - "1"
       - "--port"
-      - "9004"
+      - "8080"
 images:
   - "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}"
 options:
   logging: CLOUD_LOGGING_ONLY
 substitutions:
-  _IMAGE_NAME: cr-demo-frontend
-  _CLOUD_RUN_SA: cr-demo-frontend@ashwani-21apr-22-scrumteam.iam.gserviceaccount.com
-  _PROJECT_ID: ashwani-21apr-22-scrumteam
+  _IMAGE_NAME: fronend-service
+  _CLOUD_RUN_SA: cr-frontend-sa@vishnu-scrum-team-new.iam.gserviceaccount.com
+  _PROJECT_ID: vishnu-scrum-team-new
   
