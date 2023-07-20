@@ -16,7 +16,7 @@ def hello_frontend():
     # open a connection to a URL using urllib2
    #webUrl = urllib.request.urlopen("https://www.youtube.com/user/guru99com")
     audience = "https://backend-service-n6rizrdx5q-uk.a.run.app"
-    endpoint = "https://backend-service-n6rizrdx5q-uk.a.run.app"
+    endpoint = "https://backend-service-n6rizrdx5q-uk.a.run.app/backend"
     req = urllib.request.Request(endpoint)
 
     auth_req = google.auth.transport.requests.Request()
